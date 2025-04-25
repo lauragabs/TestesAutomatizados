@@ -6,9 +6,9 @@ Este repositório contém todas as atividades realizadas durante a disciplina de
 
 O repositório está organizado da seguinte forma:
 
-TestesAutomatizados/
-├── README.md
-├── Atividade2/
+    TestesAutomatizados/
+    ├── README.md
+    ├── Atividade2/
 
 ## Descrição das Atividades
 
