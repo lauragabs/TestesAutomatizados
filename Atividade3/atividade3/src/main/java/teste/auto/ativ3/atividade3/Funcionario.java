@@ -6,9 +6,6 @@ public class Funcionario {
     private int horasTrabalhadas;
     private double valorHora;
 
-    public static final double SALARIO_MINIMO = 1518.0;
-    public static final double TETO_SALARIAL = 100000.0;
-
     public Funcionario(String nome, int horasTrabalhadas, double valorHora) {
         this.nome = nome;
         validarHorasTrabalhadas(horasTrabalhadas);
@@ -24,19 +21,23 @@ public class Funcionario {
     }
 
     private double validarValorHora(double valorHora) {
-        double minimo = SALARIO_MINIMO * 0.04;
-        double maximo = SALARIO_MINIMO * 0.10;
+        double minimo = 1518.0 * 0.04;
+        double maximo = 1518.0 * 0.10;
         if (valorHora < minimo || valorHora > maximo) {
             throw new IllegalArgumentException("Valor hora deve ser entre 4% e 10% do salário mínimo.");
         }
         return valorHora;
     }
 
-    private void validarPagamento() {
+    protected void validarPagamento() {
         double pagamento = this.horasTrabalhadas * this.valorHora;
-        if (pagamento < SALARIO_MINIMO || pagamento > TETO_SALARIAL) {
+        if (pagamento < 1518.0 || pagamento > 100000.0) {
             throw new IllegalArgumentException("Pagamento fora dos limites permitidos.");
         }
+    }
+
+    public double calcularPagamento() {
+        return this.horasTrabalhadas * this.valorHora;
     }
 
     public String getNome() {
@@ -66,11 +67,4 @@ public class Funcionario {
         validarPagamento();
     }
 
-    public static double getSalarioMinimo() {
-        return SALARIO_MINIMO;
-    }
-
-    public static double getTetoSalarial() {
-        return TETO_SALARIAL;
-    }
 }
