@@ -11,36 +11,29 @@ public class Funcionario {
 
     public Funcionario(String nome, int horasTrabalhadas, double valorHora) {
         this.nome = nome;
-        setHorasTrabalhadas(horasTrabalhadas);
-        setValorHora(valorHora);
+        validarHorasTrabalhadas(horasTrabalhadas);
+        this.horasTrabalhadas = horasTrabalhadas;
+        this.valorHora = validarValorHora(valorHora);
         validarPagamento();
     }
 
-    public double calcularPagamento() {
-        return horasTrabalhadas * valorHora;
-    }
-
-    public void setHorasTrabalhadas(int horasTrabalhadas) {
-        if (horasTrabalhadas < 20 || horasTrabalhadas > 40) {
+    private void validarHorasTrabalhadas(int horas) {
+        if (horas < 20 || horas > 40) {
             throw new IllegalArgumentException("Horas trabalhadas devem estar entre 20 e 40.");
         }
-        this.horasTrabalhadas = horasTrabalhadas;
-        validarPagamento();
     }
 
-    public void setValorHora(double valorHora) {
+    private double validarValorHora(double valorHora) {
         double minimo = SALARIO_MINIMO * 0.04;
         double maximo = SALARIO_MINIMO * 0.10;
-
         if (valorHora < minimo || valorHora > maximo) {
             throw new IllegalArgumentException("Valor hora deve ser entre 4% e 10% do salário mínimo.");
         }
-        this.valorHora = valorHora;
-        validarPagamento();
+        return valorHora;
     }
 
-    protected void validarPagamento() {
-        double pagamento = calcularPagamento();
+    private void validarPagamento() {
+        double pagamento = this.horasTrabalhadas * this.valorHora;
         if (pagamento < SALARIO_MINIMO || pagamento > TETO_SALARIAL) {
             throw new IllegalArgumentException("Pagamento fora dos limites permitidos.");
         }
@@ -62,6 +55,17 @@ public class Funcionario {
         return valorHora;
     }
 
+    public void setHorasTrabalhadas(int horas) {
+        validarHorasTrabalhadas(horas);
+        this.horasTrabalhadas = horas;
+        validarPagamento();
+    }
+
+    public void setValorHora(double valorHora) {
+        this.valorHora = validarValorHora(valorHora);
+        validarPagamento();
+    }
+
     public static double getSalarioMinimo() {
         return SALARIO_MINIMO;
     }
@@ -69,5 +73,4 @@ public class Funcionario {
     public static double getTetoSalarial() {
         return TETO_SALARIAL;
     }
-
 }
