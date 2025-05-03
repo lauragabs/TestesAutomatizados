@@ -1,6 +1,8 @@
 package teste.auto.ativ3.atividade3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class FuncionarioTest {
@@ -32,22 +34,22 @@ public class FuncionarioTest {
     @Test
     public void testarConstrutorEntradasValida() {
         assertDoesNotThrow(() -> {
-            new Funcionario("Laura", 30, 10.0);
+            new Funcionario("Laura", 30, 70.0);
         });
     }
 
     @Test
     public void testarModificarHorasPagamentoInvalido() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         Exception ex = assertThrows(IllegalArgumentException.class, () -> {
-            f.setHorasTrabalhadas(20); // 20 * 10 = 200 < salário mínimo
+            f.setHorasTrabalhadas(20); // 20 * 70 = 1400 < salário mínimo
         });
         assertEquals("Pagamento fora dos limites permitidos.", ex.getMessage());
     }
 
     @Test
     public void testarModificarHorasEntradaInvalida() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         Exception ex = assertThrows(IllegalArgumentException.class, () -> {
             f.setHorasTrabalhadas(45);
         });
@@ -56,7 +58,7 @@ public class FuncionarioTest {
 
     @Test
     public void testarModificarHorasEntradaValida() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         assertDoesNotThrow(() -> {
             f.setHorasTrabalhadas(35);
         });
@@ -64,7 +66,7 @@ public class FuncionarioTest {
 
     @Test
     public void testarModificarValorPagamentoInvalido() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         Exception ex = assertThrows(IllegalArgumentException.class, () -> {
             f.setValorHora(2.0); // pagamento muito baixo
         });
@@ -73,7 +75,7 @@ public class FuncionarioTest {
 
     @Test
     public void testarModificarValorEntradaInvalida() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         Exception ex = assertThrows(IllegalArgumentException.class, () -> {
             f.setValorHora(200.0);
         });
@@ -82,9 +84,9 @@ public class FuncionarioTest {
 
     @Test
     public void testarModificarValorEntradaValida() {
-        Funcionario f = new Funcionario("Laura", 30, 10.0);
+        Funcionario f = new Funcionario("Laura", 30, 70.0);
         assertDoesNotThrow(() -> {
-            f.setValorHora(13.0);
+            f.setValorHora(75.0);
         });
     }
 }
