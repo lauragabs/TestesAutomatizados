@@ -10,6 +10,7 @@ O repositório está organizado da seguinte forma:
     ├── README.md
     ├── Atividade2/
     ├── Atividade3/
+    ├── Atividade4/
 
 ## Descrição das Atividades
 
@@ -22,3 +23,9 @@ O repositório está organizado da seguinte forma:
 
 - Descrição: Implementar e validar testes JUnit para as classes `Funcionario` e `FuncionarioTerceirizado`, abordando regras de negócio.
 - Objetivo: Compreender como aplicar o TDD (Desenvolvimento Orientado a Testes) para validar regras de negócio.
+
+### **Atividade 4 - Testes em JPA Repository**
+
+- Utilizar o projeto [Cliente Teste Modelo](https://github.com/brunoqp78/cliente-teste-modelo.git) para:
+- Implementar métodos no ClientRepository (busca por nome, salário e data).
+- Criar, no mínimo, 4 testes utilizando QueryMethods e métodos personalizados.
