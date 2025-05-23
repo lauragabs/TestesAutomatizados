@@ -5,6 +5,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,7 +186,7 @@ public class ClientRepositoryTest {
     /**
      * Testa a busca de um cliente pelo nome exato, ignorando diferenças de
      * maiúsculas e minúsculas.
-     * Verifica se o resultado é nulo quando o cliente não é encontrado.
+     * Verifica se o resultado retorna null quando o cliente não é encontrado.
      */
     @Test
     @DisplayName("Verifica a busca de cliente pelo nome exato, ignorando diferenças de maiúsculas e minúsculas.")
@@ -197,8 +198,7 @@ public class ClientRepositoryTest {
         Client resultado = repositorioCliente.findClientByNameIgnoreCase(nome);
 
         // Assert
-        assertNotNull(resultado);
-        assertEquals(null, resultado);
+        assertNull(resultado);
     }
 
 }
