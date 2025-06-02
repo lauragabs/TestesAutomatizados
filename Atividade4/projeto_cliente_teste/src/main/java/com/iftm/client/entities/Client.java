@@ -1,5 +1,7 @@
 package com.iftm.client.entities;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Builder
 @Entity
 @Table(name = "tb_client")
 public class Client implements Serializable {

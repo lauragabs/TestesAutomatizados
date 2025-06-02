@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import com.iftm.client.entities.Client;
+import lombok.Builder;
 
+@Builder
 public class ClientDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
