@@ -20,6 +20,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -31,12 +33,13 @@ class ClientServiceTest {
     @Mock
     private ClientRepository repository;
 
-//    • findAllPaged deveria retornar uma página com todos os clientes
-//    (e chamar o método findAll do repository)
+    // • findAllPaged deveria retornar uma página com todos os clientes
+    // (e chamar o método findAll do repository)
 
     /**
-     Verifica se o método {@code findAllPaged} retorna uma página de {@code ClientDTOs}
-     quando um {@code PageRequest} válido é fornecido.
+     * Verifica se o método {@code findAllPaged} retorna uma página de
+     * {@code ClientDTOs}
+     * quando um {@code PageRequest} válido é fornecido.
      */
     @Test
     void findAllPagedShouldReturnPageOfClientDTOsWhenPageRequestIsValid() {
@@ -59,7 +62,8 @@ class ClientServiceTest {
     }
 
     /**
-     * Verifica se o método {@code findAllPaged} retorna uma página vazia de {@code ClientDTOs}
+     * Verifica se o método {@code findAllPaged} retorna uma página vazia de
+     * {@code ClientDTOs}
      * quando não existem clientes no repositório.
      */
     @Test
@@ -78,14 +82,14 @@ class ClientServiceTest {
         verify(repository, times(1)).findAll(pageRequest);
     }
 
-//• findById deveria
-//◦ retornar um ClientDTO quando o id existir
-//◦ lançar ResourceNotFoundException quando o id não existir
+    // • findById deveria
+    // ◦ retornar um ClientDTO quando o id existir
+    // ◦ lançar ResourceNotFoundException quando o id não existir
 
     /**
-    * Testa se o método {@code findById} retorna um {@code ClientDTO}
-    * quando o ID fornecido existe no repositório.
-    */
+     * Testa se o método {@code findById} retorna um {@code ClientDTO}
+     * quando o ID fornecido existe no repositório.
+     */
     @Test
     void findByIdShouldReturnClientDTOWhenIdExists() {
 
@@ -105,7 +109,8 @@ class ClientServiceTest {
     }
 
     /**
-     * Testa se o método {@code findById} lança uma exceção {@code ResourceNotFoundException}
+     * Testa se o método {@code findById} lança uma exceção
+     * {@code ResourceNotFoundException}
      * quando o ID fornecido não existe no repositório.
      */
     @Test
@@ -125,8 +130,7 @@ class ClientServiceTest {
         verify(repository, times(1)).findById(id);
     }
 
-
-    //• insert deveria retornar um ClientDTO ao inserir um novo cliente
+    // • insert deveria retornar um ClientDTO ao inserir um novo cliente
 
     /**
      * Testa se o método {@code insert} retorna um {@code ClientDTO}
@@ -147,11 +151,9 @@ class ClientServiceTest {
         Assertions.assertEquals(dto.getChildren(), clientDTO.getChildren());
     }
 
-
-
-//• update deveria
-//◦ retornar um ClientDTO quando o id existir
-//◦ lançar uma ResourceNotFoundException quando o id não existir
+    // • update deveria
+    // ◦ retornar um ClientDTO quando o id existir
+    // ◦ lançar uma ResourceNotFoundException quando o id não existir
 
     /**
      * Testa se o método {@code update} retorna um {@code ClientDTO}
@@ -177,7 +179,8 @@ class ClientServiceTest {
     }
 
     /**
-     * Testa se o método {@code update} lança uma exceção {@code ResourceNotFoundException}
+     * Testa se o método {@code update} lança uma exceção
+     * {@code ResourceNotFoundException}
      * quando o ID fornecido não existe no repositório.
      */
     @Test
@@ -196,10 +199,9 @@ class ClientServiceTest {
 
     }
 
-
-//    • delete deveria
-//◦ retornar vazio quando o id existir
-//◦ lançar uma EmptyResultDataAccessException quando o id não existir
+    // • delete deveria
+    // ◦ retornar vazio quando o id existir
+    // ◦ lançar uma EmptyResultDataAccessException quando o id não existir
     /**
      * Testa se o método {@code delete} não lança exceções
      * quando o ID fornecido existe no repositório.
@@ -216,9 +218,9 @@ class ClientServiceTest {
         verify(repository, times(1)).deleteById(id);
     }
 
-
     /**
-     * Testa se o método {@code delete} lança uma exceção {@code ResourceNotFoundException}
+     * Testa se o método {@code delete} lança uma exceção
+     * {@code ResourceNotFoundException}
      * quando o ID fornecido não existe no repositório.
      */
     @Test
@@ -233,10 +235,34 @@ class ClientServiceTest {
         verify(repository, times(1)).deleteById(id);
     }
 
+    // • findByIncome deveria retornar uma página com os clientes que tenham o
+    // Income
+    // informado (e chamar o mét-odo findByIncome do repository)
 
-//• findByIncome deveria retornar uma página com os clientes que tenham o Income
-//    informado (e chamar o mét-odo findByIncome do repository)
+    /**
+     * Testa se o método {@code findByIncome} retorna uma página de
+     * {@code ClientDTOs}
+     * quando um valor de renda é fornecido.
+     */
+    @Test
+    void findByIncomeShouldReturnPageOfClientDTOsWhenIncomeIsProvided() {
+        // Arrange
+        Double income = 3000.0; // agora o income confere com o client criado
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        List<Client> clients = List.of(createClient());
+        Page<Client> page = new PageImpl<>(clients, pageRequest, clients.size());
 
+        when(repository.findByIncome(eq(income), eq(pageRequest))).thenReturn(page);
+
+        // Act
+        Page<ClientDTO> result = service.findByIncome(income, pageRequest);
+
+        // Assert
+        Assertions.assertFalse(result.isEmpty());
+        Assertions.assertEquals(1, result.getTotalElements());
+        Assertions.assertEquals("John Doe", result.getContent().get(0).getName());
+        verify(repository, times(1)).findByIncome(eq(income), eq(pageRequest));
+    }
 
     private Client createClient() {
         return Client.builder()

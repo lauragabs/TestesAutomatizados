@@ -3,6 +3,8 @@ package com.iftm.client.repositories;
 import java.time.Instant;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -69,4 +71,13 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
      * @return Uma lista de clientes cuja renda é menor que o valor especificado.
      */
     List<Client> findClientsByIncomeLessThan(Double renda);
+
+    /**
+     * Busca clientes com renda exata.
+     *
+     * @param income   O valor da renda a ser buscado.
+     * @param pageable Informações de paginação.
+     * @return Uma página de clientes com a renda exata especificada.
+     */
+    Page<Client> findByIncome(Double income, Pageable pageable);
 }
