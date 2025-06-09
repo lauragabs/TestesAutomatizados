@@ -10,7 +10,7 @@ Cada subpasta representa uma atividade individual, contendo sua respectiva imple
     ├── README.md
     ├── Atividade2/
     ├── Atividade3/
-    ├── Atividade4e5/
+    ├── Atividade4-5-6/
 
 ### **Tabela de Resumo das Atividades**
 
