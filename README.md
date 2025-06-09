@@ -48,3 +48,7 @@ Cada subpasta representa uma atividade individual, contendo sua respectiva imple
 - Descrição: Implementar testes unitários na classe `ClientServiceTests` utilizando Mockito, validando os principais comportamentos dos métodos de serviço.
 
 - Objetivo: Assegurar o retorno correto de dados e o tratamento adequado de exceções esperadas dos métodos `delete`, `findAllPaged`, `findByIncome`, `findById`, `update` e `insert`, além de verificar as interações com o repositório.
+
+### **Atividade 6 - Teste de Integração sem Mockito**
+
+- Descrição : Refazer os testes da `Atividade A5`, removendo o Mockito, assim criando o teste de integração. Criando uma nova classe de teste, sem modificar a classe criada na `Atividade A5`.
