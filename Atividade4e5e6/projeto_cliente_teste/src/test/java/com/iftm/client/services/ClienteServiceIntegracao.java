@@ -126,4 +126,61 @@ class ClientServiceIntegracao {
         Assertions.assertEquals(3, updated.getChildren());
     }
 
+    /**
+     * Testa se o método {@code update} lança uma exceção
+     * {@code ResourceNotFoundException} quando o ID não existe.
+     */
+    @Test
+    void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+        ClientDTO dto = ClientDTO.builder()
+                .name("Test")
+                .cpf("00000000000")
+                .income(1000.0)
+                .birthDate(Instant.now())
+                .children(0)
+                .build();
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.update(nonExistingId, dto);
+        });
+    }
+
+    /**
+     * Testa se o método {@code delete} remove corretamente um cliente
+     * quando o ID fornecido existe.
+     */
+    @Test
+    void deleteShouldRemoveClientWhenIdExists() {
+        Assertions.assertDoesNotThrow(() -> {
+            service.delete(existingId);
+        });
+
+        Assertions.assertEquals(0, repository.count());
+    }
+
+    /**
+     * Testa se o método {@code delete} lança uma exceção
+     * {@code ResourceNotFoundException} quando o ID não existe.
+     */
+    @Test
+    void deleteShouldThrowExceptionWhenIdDoesNotExist() {
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.delete(nonExistingId);
+        });
+    }
+
+    /**
+     * Testa se o método {@code findByIncome} retorna clientes com
+     * a renda informada.
+     */
+    @Test
+    void findByIncomeShouldReturnClientWhenIncomeMatches() {
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        Page<ClientDTO> result = service.findByIncome(3000.0, pageRequest);
+
+        Assertions.assertFalse(result.isEmpty());
+        Assertions.assertEquals("John Doe", result.getContent().get(0).getName());
+    }
+}
+
 }
