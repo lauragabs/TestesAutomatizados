@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.iftm.client.repositories.ClientRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 2, Errors: 2, Skipped: 0, Time elapsed: 2.615 s <<< FAILURE! - in com.iftm.client.repositories.ClientRepositoryTest
+testaBuscaClientesPorDataNascimentoEntre  Time elapsed: 0.504 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.iftm.client.entities.Client.getName()" because the return value of "java.util.Optional.orElse(Object)" is null
+	at com.iftm.client.repositories.ClientRepositoryTest.testaBuscaClientesPorDataNascimentoEntre(ClientRepositoryTest.java:108)
+
+testaBuscaClientesPorSalarioMenorQue  Time elapsed: 0.005 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.iftm.client.entities.Client.getName()" because the return value of "java.util.Optional.orElse(Object)" is null
+	at com.iftm.client.repositories.ClientRepositoryTest.testaBuscaClientesPorSalarioMenorQue(ClientRepositoryTest.java:154)
+
+testaBuscaClientesPorNomeContendoParte  Time elapsed: 0.006 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Conceição Evaristo> but was: <ConceiÃ§Ã£o Evaristo>
+	at com.iftm.client.repositories.ClientRepositoryTest.testaBuscaClientesPorNomeContendoParte(ClientRepositoryTest.java:59)
+
+testaBuscaClientePorNomeExato  Time elapsed: 0.005 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: not <null>
+	at com.iftm.client.repositories.ClientRepositoryTest.testaBuscaClientePorNomeExato(ClientRepositoryTest.java:182)
+

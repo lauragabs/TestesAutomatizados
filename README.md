@@ -11,15 +11,18 @@ Cada subpasta representa uma atividade individual, contendo sua respectiva imple
     ├── Atividade2/
     ├── Atividade3/
     ├── Atividade4-5-6/
+    ├── Atividade7/
 
 ### **Tabela de Resumo das Atividades**
 
-| Atividade | Tecnologia      | Testes             | Conceitos Abordados              |
-| --------- | --------------- | ------------------ | -------------------------------- |
-| 2         | JUnit           | Unitários          | Operações aritméticas, exceções  |
-| 3         | JUnit           | Unitários          | Regras de negócio, TDD           |
-| 4         | Spring Data JPA | Integração         | Query Methods, @Query, filtragem |
-| 5         | Mockito         | Unitários mockados | Mocks, verificação de chamadas   |
+| Atividade | Tecnologia      | Testes             | Conceitos Abordados                                  |
+| --------- | --------------- | ------------------ | ---------------------------------------------------- |
+| 2         | JUnit           | Unitários          | Operações aritméticas, exceções                      |
+| 3         | JUnit           | Unitários          | Regras de negócio, TDD                               |
+| 4         | Spring Data JPA | Integração         | Query Methods, @Query, filtragem                     |
+| 5         | Mockito         | Unitários mockados | Mocks, verificação de chamadas                       |
+| 6         | Spring Boot     | Integração         | Teste de serviços sem mocks (integração real)        |
+| 7         | MockMVC         | Integração Web     | Testes de endpoints REST, validação HTTP e respostas |
 
 ## Descrição das Atividades
 
@@ -52,3 +55,9 @@ Cada subpasta representa uma atividade individual, contendo sua respectiva imple
 ### **Atividade 6 - Teste de Integração sem Mockito**
 
 - Descrição : Refazer os testes da `Atividade A5`, removendo o Mockito, assim criando o teste de integração. Criando uma nova classe de teste, sem modificar a classe criada na `Atividade A5`.
+- Objetivo: Garantir que os métodos do serviço funcionam corretamente em um ambiente integrado, acessando o banco de dados real (ou em memória), validando persistência, atualização, remoção e busca de clientes sem uso de mocks.
+
+### **Atividade 7 - Testes de Integração da Camada Web com MockMVC**
+
+- **Descrição:** Implementar testes de integração para os endpoints REST do recurso de clientes utilizando MockMVC e MockBean.
+- **Objetivo:** Garantir que todos os endpoints do recurso de clientes respondam corretamente para cenários de sucesso e erro, validando status HTTP, estrutura e conteúdo das respostas.
